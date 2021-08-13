@@ -44,8 +44,8 @@ def _parse_chunk(jonb_contents):
     (layer,), remaining = _unpack_from("<I", remaining)
     unknown2, remaining = _unpack_from("<3I", remaining)
 
-    chunk = {"src_x", src_x, "src_y", src_y, "src_width", src_width, "src_height", src_height, "x", x,
-             "y", y, "width", width, "height", height, "unknown1", unknown1, "layer", layer, "unknown2", unknown2}
+    chunk = {"src_x": src_x, "src_y": src_y, "src_width": src_width, "src_height": src_height, "x": x,
+             "y": y, "width": width, "height": height, "unknown1": unknown1, "layer": layer, "unknown2": unknown2}
 
     return chunk, remaining
 
