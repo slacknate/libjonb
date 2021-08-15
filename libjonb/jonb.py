@@ -37,7 +37,7 @@ def _parse_header(jonb_contents):
 def _parse_chunk(jonb_contents):
     """
     Parse a single chunk from our jonbin file.
-    Honestly? No idea what a chunk is! :D
+    A chunk is used to define the position of a collision box within a sprite coordinate system.
     """
     (src_x, src_y, src_width, src_height, x, y, width, height), remaining = _unpack_from("<8f", jonb_contents)
     unknown1, remaining = _unpack_from("<8I", remaining)
@@ -105,8 +105,8 @@ def extract_collision_boxes(jonb_path, out_file=None):
         jonb_contents = jonb_fp.read()
 
     images, remaining = _parse_header(jonb_contents)
-    _, hurtboxes, hitboxes, __, ___ = _parse_jonbin(remaining)
+    chunks, hurtboxes, hitboxes, _, __ = _parse_jonbin(remaining)
 
-    collision_data = {"hurtboxes": hurtboxes, "hitboxes": hitboxes}
+    collision_data = {"chunks": chunks, "hurtboxes": hurtboxes, "hitboxes": hitboxes}
     with open(out_file, "w") as col_fp:
         json.dump(collision_data, col_fp)
