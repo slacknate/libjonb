@@ -107,8 +107,6 @@ def extract_collision_boxes(jonb_path, out_file=None):
     images, remaining = _parse_header(jonb_contents)
     _, hurtboxes, hitboxes, __, ___ = _parse_jonbin(remaining)
 
-    assert len(images) == 1
-
     collision_data = {"hurtboxes": hurtboxes, "hitboxes": hitboxes}
     with open(out_file, "w") as col_fp:
         json.dump(collision_data, col_fp)
