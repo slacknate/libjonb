@@ -27,9 +27,11 @@ def _parse_header(jonb_contents):
     (image_count,), remaining = _unpack_from("<h", remaining)
 
     images = []
-    for index in range(0, image_count):
+    for _ in range(0, image_count):
         (image_name,), remaining = _unpack_from("<32s", remaining)
-        images.append(image_name.rstrip(b"\x00").decode("ascii"))
+        # We replace unknown characters in the byte decode as some image names have non-ascii characters?
+        # Unsure what encoding they are so for now we just ignore it :D
+        images.append(image_name.rstrip(b"\x00").decode("ascii", "replace"))
 
     return images, remaining
 
